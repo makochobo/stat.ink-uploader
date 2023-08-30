@@ -42,15 +42,3 @@ jobs:
         working-directory: s3s
         run: |
           python3 s3s.py -r
-          
-      - name: Commit and Push # 実行結果で差分が生じればレポジトリに反映
-        run: |
-          git config --local user.email ${{ secrets.EMAIL }}
-          git config --local user.name ${{ secrets.USERNAME }}
-          git config pull.rebase false
-          git pull
-          if (git diff --shortstat | grep '[0-9]'); then \
-            git add .; \
-            git commit -m "Add new results"; \
-            git push origin master; \
-          fi
